@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class Product {
-
+//제품 Entity
 @Id
     @Column(length= 20 , nullable=false)
-    private String ProductCode;
+    private String ProductCode; //제품의 코드
 
     @Column(length = 20,nullable = false)
-    private String ProductName;//
+    private String ProductName; //제품의 이름
 }

@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name="production_plan")
+@Table
 @ToString
 
 @Getter
@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProductionPlan {
     @Id
-    @Column(length = 20 ,nullable = false)
+//    @Column(length = 20 ,nullable = false)
     private String ProductionPK; //PK
 
     @Column(nullable = false)
