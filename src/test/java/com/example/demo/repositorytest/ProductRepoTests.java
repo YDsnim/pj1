@@ -1,13 +1,17 @@
 package com.example.demo.repositorytest;
 
 import com.example.demo.entity.Product;
+import com.example.demo.entity.ProductionPlan;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.ProductionPlanRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
+
 
 
 @SpringBootTest
@@ -31,15 +35,18 @@ public class ProductRepoTests {
 
     @Test //JPA 활용 DB에 입력 테스트 코드 (리포짓토리.save)
     //null값 허용이 아닌경우 모드 빌드에 추가하도록
-    public void testinsertDummies() {
-        for (int i = 0; i <= 10; i++) {
-            Product product = Product.builder()
-                    .ProductCode("PDC" + i)
-                    .ProductName("G" + i)
+    public void testInsertDummies() {
+        for (Long i = 0L; i <= 30; i++) {
+            ProductionPlan productionPlan = ProductionPlan.builder() //엔티티 입력
+                    .ProductionPK("PK"+i)
+                    .ProductionQuantity(i)
+                    .ProductionDate(Date.from(Instant.now()))
+                    .complete(false)
                     .build();
-            productRepo.save(product);
-            System.out.println(product.getProductCode());
-            System.out.println(product.getProductName());
+            productionPlanRepo.save(productionPlan);          //엔티티와 연결된 리포지토리 입력
+            System.out.println(productionPlan.getProductionPK());   //콘솔 출력
+            System.out.println(productionPlan.getProductionQuantity());
+            System.out.println(productionPlan.getProductionDate());
 
         }
     }

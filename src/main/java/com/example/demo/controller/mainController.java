@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @Log4j2
 public class mainController {
-    @GetMapping("/test1")
-    void test1 (){
+    @GetMapping("/ProductionPlan")
+    void ProductPlan (){
 
-    log.info("test1 진입");
+    log.info("Product 진입");
 
     }
 }

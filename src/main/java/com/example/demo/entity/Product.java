@@ -1,9 +1,10 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -19,4 +20,6 @@ public class Product {
 
     @Column(length = 20,nullable = false)
     private String ProductName; //제품의 이름
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProductionPlan> productionPlanList = new ArrayList<>();
 }

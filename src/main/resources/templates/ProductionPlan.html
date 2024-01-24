@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생산계획 관리</title>
+</head>
+<body>
+
+<h1>생산계획</h1>
+
+
+<h2>Product Details</h2>
+<label for="productCode">Product Code:</label>
+<input type="text" id="productCode" name="productCode" readonly>
+<br>
+<label for="productName">Product Name:</label>
+<input type="text" id="productName" name="productName">
+<br>
+<button onclick="retrieveProducts()">Retrieve Products</button>
+<button onclick="addProduct()">Add Product</button>
+<button onclick="searchProduct()">Search Product</button>
+<button onclick="updateProduct()">Update Product</button>
+<button onclick="deleteProduct()">Delete Product</button>
+
+<h2>생산계획 목록</h2>
+<ul id="productList"></ul>
+
+
+
+<script>
+    function retrieveProducts() {
+        // Ajax call to retrieve product list
+        // Update the #productList element with the retrieved data
+        // Example: document.getElementById("productList").innerHTML = "Retrieved Product List";
+    }
+
+    function addProduct() {
+        // Ajax call to add a new product
+        // Update the #productList element with the updated product list
+        // Example: document.getElementById("productList").innerHTML = "Product Added";
+    }
+
+    function searchProduct() {
+        // Ajax call to search for a product
+        // Update the #productCode and #productName fields with the retrieved product details
+        // Example: document.getElementById("productCode").value = "Retrieved Product Code";
+        //          document.getElementById("productName").value = "Retrieved Product Name";
+    }
+
+    function updateProduct() {
+        // Ajax call to update an existing product
+        // Update the #productList element with the updated product list
+        // Example: document.getElementById("productList").innerHTML = "Product Updated";
+    }
+
+    function deleteProduct() {
+        // Ajax call to delete an existing product
+        // Update the #productList element with the updated product list
+        // Example: document.getElementById("productList").innerHTML = "Product Deleted";
+    }
+</script>
+
+</body>
+</html>
