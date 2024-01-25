@@ -11,17 +11,15 @@
 
 
 <h2>Product Details</h2>
-<label for="productCode">Product Code:</label>
-<input type="text" id="productCode" name="productCode" readonly>
-<br>
-<label for="productName">Product Name:</label>
-<input type="text" id="productName" name="productName">
-<br>
-<button onclick="retrieveProducts()">Retrieve Products</button>
-<button onclick="addProduct()">Add Product</button>
-<button onclick="searchProduct()">Search Product</button>
-<button onclick="updateProduct()">Update Product</button>
-<button onclick="deleteProduct()">Delete Product</button>
+<form action="/saveProduct" method="post" th:object="${productDTO}">
+    <label for="productCode">Product Code:</label>
+    <input type="text" id="productCode" name="productCode" th:field="*{productCode}" required>
+    <br>
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" name="productName"  th:field="*{productName}" required>
+    <br>
+    <button type="submit">Save Product</button>
+</form>
 
 <h2>생산계획 목록</h2>
 <!--<ul id="productList">-->

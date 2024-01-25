@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ProductDTO;
 import com.example.demo.dto.SampleDTO;
-import lombok.Getter;
+import com.example.demo.service.MainService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.Instant;
@@ -17,20 +21,20 @@ import java.util.stream.IntStream;
 @Controller
 @Log4j2
 public class mainController {
-    @GetMapping({"/ProductionPlan"})
-   void ProductionPlan() {
+    @Autowired
+    private MainService mainService;
 
+    @GetMapping("/ProductionPlan")
+    void ProductionPlan(@ModelAttribute ProductDTO productDTO) {
         log.info("ProductionPlan 진입");
-        log.info("exInline 배우기");
-
-        SampleDTO dto = SampleDTO.builder()
-                .ProductionPK("PK100")
-                .ProductionDate(Date.from(Instant.now()))
-                .ProductionQuantity(100L)
-                .complete(false)
-                .build();
-
     }
+
+    @PostMapping("/saveProduct")
+    public String saveProduct(@ModelAttribute ProductDTO productDTO) {
+        mainService.SaveProduct(productDTO);
+        return "redirect:/ProductionPlan";
+    }
+
     @GetMapping({"/exInline"})
     public String exInline(RedirectAttributes redirectAttributes) {
 
@@ -54,12 +58,12 @@ public class mainController {
         log.info("ex3 진입");
     }
 
-    @GetMapping({"/ProductionPlan","exLink"})
-    public void exModel(Model model){
-        List<SampleDTO> list = IntStream.rangeClosed(1,20)
+    @GetMapping({"exLink"})
+    public void exModel(Model model) {
+        List<SampleDTO> list = IntStream.rangeClosed(1, 20)
                 //asLongStream : ㅣIntStream의 int요소를 Long으로 변환해줌
                 .asLongStream()
-                .mapToObj(i->{
+                .mapToObj(i -> {
                     SampleDTO dto = SampleDTO.builder()
                             .ProductionPK("PK100")
                             .ProductionDate(Date.from(Instant.now()))
@@ -68,12 +72,15 @@ public class mainController {
                             .build();
                     return dto;
                 }).collect(Collectors.toList());
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
     }
+
     //레이아웃 include방식 예제
 //    th:replace  = 완전 대체 ; th:insert = 기존내용의 바깥쪽 태그는 그대로 유지하면서 추가되는 방식?
     @GetMapping("/exLayout1")
-    public void exLayout1(){
+    public void exLayout1() {
         log.info("exLayout1 진입");
     }
+
+
 }

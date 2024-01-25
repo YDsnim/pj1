@@ -1,9 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.ProductionPlan;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
