@@ -7,9 +7,6 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table
-@ToString
-
 @Getter
 @Builder
 @AllArgsConstructor

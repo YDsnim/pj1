@@ -4,9 +4,12 @@ import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductionPlan;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.ProductionPlanRepo;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Date;
@@ -52,15 +55,21 @@ public class ProductRepoTests {
     }
 
 
+    @Transactional
     @Test //조회기능 테스트
-    public void testSelect() {
-        String productCode = "PDC4"; //조회 할 검색어?
-        Optional<Product> result = productRepo.findById(productCode); //findById 검색어 기준 찾는다. 프로덕트코드 Db
-        System.out.println("=========================================");
-        if (result.isPresent()) {
-            Product product = result.get();
-            System.out.println(product);
-        }
+    public void testSelect () {
+        String search ="CODE12" ; //조회 할 검색어?
+
+            Optional<Product> result = productRepo.findById(search);//findById 검색어 기준 찾는다. 프로덕트코드 Db
+
+            System.out.println("=========================================");
+            Product product = result.orElseThrow(() -> new EntityNotFoundException("검색결과 없음 : "+ search));
+            System.out.println(product.getProductName());
+        //        if (result.isPresent()) {
+//            Product product = result.get();
+//            System.out.println(product.getProductCode());
+//            System.out.println(product.getProductCode());
+//        }
     }
 
 

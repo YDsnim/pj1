@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +24,21 @@
 <button onclick="deleteProduct()">Delete Product</button>
 
 <h2>생산계획 목록</h2>
-<ul id="productList"></ul>
+<!--<ul id="productList">-->
+<!--    <li th:each="dto,state : ${list}">-->
+<!--        <span th:if="${state.index %5==0}"-->
+<!--              th:text="${'-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;'+state.index}">인덱스가 5의 단위면 출력 </span>-->
+<!--        <br>-->
+<!--        <span th:text="${dto.ProductionPK }"> 인덱스 5의 단위가 아니면 ProductionPK 출력 </span>-->
+<!--    </li>-->
+<!--</ul>-->
 
+<ul id="productList">
+    <th:block th:each="dto,state : ${list}">
+        <li th:text="${state.index % 5==0}?${state.index}:${dto.ProductionPK}">
+        </li>
+    </th:block>
+</ul>
 
 
 <script>
