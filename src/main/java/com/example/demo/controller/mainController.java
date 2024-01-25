@@ -70,4 +70,10 @@ public class mainController {
                 }).collect(Collectors.toList());
         model.addAttribute("list",list);
     }
+    //레이아웃 include방식 예제
+//    th:replace  = 완전 대체 ; th:insert = 기존내용의 바깥쪽 태그는 그대로 유지하면서 추가되는 방식?
+    @GetMapping("/exLayout1")
+    public void exLayout1(){
+        log.info("exLayout1 진입");
+    }
 }
