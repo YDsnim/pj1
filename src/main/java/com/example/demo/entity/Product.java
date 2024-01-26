@@ -21,5 +21,6 @@ public class Product {
 
     @Column(length = 20,nullable = false)
     private String ProductName; //제품의 이름
-
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProductionPlan> productionPlanList = new ArrayList<>();
 }

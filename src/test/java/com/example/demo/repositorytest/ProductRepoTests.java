@@ -12,6 +12,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -40,6 +41,15 @@ public class ProductRepoTests {
     //null값 허용이 아닌경우 모드 빌드에 추가하도록
     public void testInsertDummies() {
         for (Long i = 0L; i <= 30; i++) {
+//            ==Product  생성
+            Product product = Product.builder()
+                    .ProductCode("PDC"+i)
+                    .ProductName("G"+i)
+                    .build();
+//            product.getProductionPlanList().add(productionPlan);
+            productRepo.save(product);
+            System.out.println(product);
+//              ==ProductPlan 생성
             ProductionPlan productionPlan = ProductionPlan.builder() //엔티티 입력
                     .ProductionPK("PK"+i)
                     .ProductionQuantity(i)
@@ -50,7 +60,6 @@ public class ProductRepoTests {
             System.out.println(productionPlan.getProductionPK());   //콘솔 출력
             System.out.println(productionPlan.getProductionQuantity());
             System.out.println(productionPlan.getProductionDate());
-
         }
     }
 
@@ -78,11 +87,13 @@ public class ProductRepoTests {
         //마지막 저장삭제조회수정 = 해당리포짓토리.save
 
     public void testUpdate(){
-        Product product = Product.builder()
-                .ProductCode("PDC0")
-                .ProductName("G14")
-                .build();
-        productRepo.save(product);
+
+            Product product = Product.builder()
+                    .ProductCode("PDC")
+                    .ProductName("G")
+                    .build();
+            productRepo.save(product);
+            System.out.println(product);
 
     }
 
