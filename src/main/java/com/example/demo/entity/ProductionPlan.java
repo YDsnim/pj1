@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProductionPlan {
     @Id
-//    @Column(length = 20 ,nullable = false)
+    @Column(length = 20)
     private String ProductionPK; //PK
 
     @Column(nullable = false)

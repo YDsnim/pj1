@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        table {
+            border-collapse: collapse; /* 테이블 테두리를 합치기 */
+            width: 50%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* 테두리 두께 설정 */
+            text-align: center; /* 셀 내용을 중앙 정렬 */
+            padding: 8px; /* 셀 안의 여백 설정 */
+        }
+    </style>
+
+
     <title>생산계획 관리</title>
 </head>
 <body>
@@ -22,55 +37,28 @@
 </form>
 
 <h2>생산계획 목록</h2>
-<!--<ul id="productList">-->
-<!--    <li th:each="dto,state : ${list}">-->
-<!--        <span th:if="${state.index %5==0}"-->
-<!--              th:text="${'-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;'+state.index}">인덱스가 5의 단위면 출력 </span>-->
-<!--        <br>-->
-<!--        <span th:text="${dto.ProductionPK }"> 인덱스 5의 단위가 아니면 ProductionPK 출력 </span>-->
-<!--    </li>-->
-<!--</ul>-->
+<table>
 
-<ul id="productList">
-    <th:block th:each="dto,state : ${list}">
-        <li th:text="${state.index % 5==0}?${state.index}:${dto.ProductionPK}">
-        </li>
-    </th:block>
-</ul>
+<!-- productList에 있는 데이터를 반복하며 출력 -->
+<tr>
+    <th>ProductionPK</th>
+    <th>ProductionQuantity</th>
+    <th>ProductionDate</th>
+    <th>complete</th>
+</tr>
+<tr th:each="showPlanList : ${showProductionPlanList}">
+
+    <td th:text="${showPlanList.ProductionPK}"></td>
+
+    <td th:text="${showPlanList.ProductionQuantity}"></td>
+
+    <td th:text="${showPlanList.ProductionDate}"></td>
+
+    <td th:text="${showPlanList.complete}"></td>
+</tr>
+</table>
 
 
-<script>
-    function retrieveProducts() {
-        // Ajax call to retrieve product list
-        // Update the #productList element with the retrieved data
-        // Example: document.getElementById("productList").innerHTML = "Retrieved Product List";
-    }
-
-    function addProduct() {
-        // Ajax call to add a new product
-        // Update the #productList element with the updated product list
-        // Example: document.getElementById("productList").innerHTML = "Product Added";
-    }
-
-    function searchProduct() {
-        // Ajax call to search for a product
-        // Update the #productCode and #productName fields with the retrieved product details
-        // Example: document.getElementById("productCode").value = "Retrieved Product Code";
-        //          document.getElementById("productName").value = "Retrieved Product Name";
-    }
-
-    function updateProduct() {
-        // Ajax call to update an existing product
-        // Update the #productList element with the updated product list
-        // Example: document.getElementById("productList").innerHTML = "Product Updated";
-    }
-
-    function deleteProduct() {
-        // Ajax call to delete an existing product
-        // Update the #productList element with the updated product list
-        // Example: document.getElementById("productList").innerHTML = "Product Deleted";
-    }
-</script>
 
 </body>
 </html>
