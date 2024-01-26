@@ -19,6 +19,8 @@
 
 
     <title>생산계획 관리</title>
+
+
 </head>
 <body>
 
@@ -36,34 +38,33 @@
     <button type="submit">Save Product</button>
 </form>
 
+
 <h2>생산계획 목록</h2>
-
-
-
+<br>
+<label for="ListSearch">조회하기</label>
+<input type="text" id="ListSearch" th:text="*{Searching}" required>
 <table>
+    <tr>
+        <th>RowNum</th>
+        <th>ProductionQuantity</th>
+        <th>ProductionDate</th>
+        <th>수정/삭제</th>
+    </tr>
+    <tr th:each="showPlanList : ${showProductionPlanList}">
+        <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.RowNum}"></td>
 
-<!-- productList에 있는 데이터를 반복하며 출력 -->
-<tr>
-    <th>RowNum</th>
-    <th>ProductionQuantity</th>
-    <th>ProductionDate</th>
-    <th>수정/삭제</th>
-</tr>
-<tr th:each="showPlanList : ${showProductionPlanList}">
-    <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.RowNum}"></td>
+        <td th:text="${showPlanList.ProductionQuantity}"></td>
 
-    <td th:text="${showPlanList.ProductionQuantity}"></td>
-
-    <td  th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
-
-    <form th:action="@{/requestDelete}" method="post" >
-    <input type="hidden" name="rowNum" th:value="${showPlanList.RowNum}" />
-    <td><button type="submit">삭제</button> </td>
-    </form>
-</tr>
+        <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
+<!--        삭제 버튼-->
+        <form th:action="@{/requestDelete}" method="post">
+            <input type="hidden" name="rowNum" th:value="${showPlanList.RowNum}"/>
+            <td>
+                <button type="submit">삭제</button>
+            </td>
+        </form>
+    </tr>
 </table>
-
-
 
 
 </body>
