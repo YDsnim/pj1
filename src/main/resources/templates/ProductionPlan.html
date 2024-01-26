@@ -26,12 +26,12 @@
 
 
 <h2>Product Details</h2>
-<form action="/saveProduct" method="post" th:object="${productDTO}">
-    <label for="productCode">Product Code:</label>
-    <input type="text" id="productCode" name="productCode" th:field="*{productCode}" required>
+<form action="/saveProduct" method="post" th:object="${productionPlanDTO}">
+    <label for="ProductionQuantity">ProductionQuantity:</label>
+    <input type="text" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
     <br>
-    <label for="productName">Product Name:</label>
-    <input type="text" id="productName" name="productName"  th:field="*{productName}" required>
+    <label for="ProductionDate">ProductionDate:</label>
+    <input type="date" id="ProductionDate" th:field="*{ProductionDate}" required>
     <br>
     <button type="submit">Save Product</button>
 </form>
@@ -41,20 +41,21 @@
 
 <!-- productList에 있는 데이터를 반복하며 출력 -->
 <tr>
-    <th>ProductionPK</th>
+    <th>RowNum</th>
     <th>ProductionQuantity</th>
     <th>ProductionDate</th>
-    <th>complete</th>
+    <th>수정/삭제</th>
 </tr>
 <tr th:each="showPlanList : ${showProductionPlanList}">
-
-    <td th:text="${showPlanList.ProductionPK}"></td>
+    <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.RowNum}"></td>
 
     <td th:text="${showPlanList.ProductionQuantity}"></td>
 
-    <td th:text="${showPlanList.ProductionDate}"></td>
+    <td  th:text="${
+    #dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')
+    }"></td>
 
-    <td th:text="${showPlanList.complete}"></td>
+    <td>수정 삭제 </td>
 </tr>
 </table>
 

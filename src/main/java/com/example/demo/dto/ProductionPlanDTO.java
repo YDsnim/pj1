@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,11 +16,11 @@ import java.util.Date;
 
 public class ProductionPlanDTO {
 
-    private String ProductionPK; //PK
+    private Long RowNum; //PK
 
     private Long ProductionQuantity; //생산 소요량
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ProductionDate;//생산 예정일
 
-    private Boolean complete;
+
 }

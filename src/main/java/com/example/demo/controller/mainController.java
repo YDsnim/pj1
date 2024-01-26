@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ProductDTO;
-import com.example.demo.dto.SampleDTO;
+import com.example.demo.dto.ProductionPlanDTO;
 import com.example.demo.entity.ProductionPlan;
 import com.example.demo.service.MainService;
 import lombok.extern.log4j.Log4j2;
@@ -11,14 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Controller
 @Log4j2
@@ -29,23 +24,33 @@ public class mainController {
 
     @GetMapping("/ProductionPlan")
     public String ProductionPlan(Model model) {
-
         log.info("ProductionPlan 진입");
         List<ProductionPlan> productionPlanList = mainService.ShowProductionPlanList();
-        model.addAttribute("showProductionPlanList",productionPlanList);
+        model.addAttribute("showProductionPlanList", productionPlanList);
         // ProductDTO를 뷰에서 사용하는 경우 아래와 같이 모델에 추가
-        model.addAttribute("productDTO", new ProductDTO());
+        model.addAttribute("productionPlanDTO", new ProductionPlanDTO());
         return "ProductionPlan";
     }
 
 
-
     @PostMapping("/saveProduct") //입력받은 제품키 , 제품명 저장
-    public String saveProduct(@ModelAttribute ProductDTO productDTO) {
-        mainService.SaveProduct(productDTO);
+    public String saveProduction(@ModelAttribute ProductionPlanDTO productionPlanDTO) {
+        log.info("저장버튼 클릭 확인");
+
+        //타임리프에서 받아온 날짜정보 파싱하기
+        Date dateStirng = productionPlanDTO.getProductionDate();
+        Date productionDate = null;
+
+
+        mainService.SaveProduction(productionPlanDTO);
+        log.info("저장 완료 리다이렉트 합니다.");
         return "redirect:/ProductionPlan";
     }
-
+//    @PostMapping("/saveProduct") //입력받은 제품키 , 제품명 저장
+//    public String saveProduction(@ModelAttribute ProductionPlanDTO productionPlanDTO) {
+//        mainService.SaveProduct(productionPlanDTO);
+//        return "redirect:/ProductionPlan";
+//    }
 
 
 //

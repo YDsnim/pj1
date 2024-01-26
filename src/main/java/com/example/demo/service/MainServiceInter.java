@@ -14,10 +14,13 @@ public interface MainServiceInter {
     //DTO to ENTITY
     //즉 Service->Cont->VIEW->th-> DTO->ENTITY ->Repo->DB 저장
 
-   void SaveProduct(ProductDTO productDTO);
+//   void SaveProduct(ProductDTO productDTO);
 
 
-   List<ProductionPlan> ShowProductionPlanList();
+    //DTO to ENTITY
+    void SaveProduction(ProductionPlanDTO productionPlanDTO);
+
+    List<ProductionPlan> ShowProductionPlanList();
 
 
    //DB-> View
