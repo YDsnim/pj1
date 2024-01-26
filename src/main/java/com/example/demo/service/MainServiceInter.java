@@ -18,12 +18,15 @@ public interface MainServiceInter {
 
 
     //DTO to ENTITY
-    void SaveProduction(ProductionPlanDTO productionPlanDTO);
+    void SaveProduction(ProductionPlanDTO productionPlanDTO); //입력값 저장
+    //DB-> View
 
-    List<ProductionPlan> ShowProductionPlanList();
+    List<ProductionPlan> ShowProductionPlanList();  //DB에서 출력
+
+    //View->Controller->Service->Repo->DB
+    void removePlan(Long RowNum);   //뷰에서 데이터 열 삭제
 
 
-   //DB-> View
     /*
     1.Service 작성
         1-1 메서드 (ex)해당 DTO) 추가

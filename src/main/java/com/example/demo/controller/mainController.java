@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,10 @@ public class mainController {
         model.addAttribute("showProductionPlanList", productionPlanList);
         // ProductDTO를 뷰에서 사용하는 경우 아래와 같이 모델에 추가
         model.addAttribute("productionPlanDTO", new ProductionPlanDTO());
+
+        //삭제시 뭘 지웠는지 로그로 표현
+        log.info(  model.getAttribute("removePlan"));
+
         return "ProductionPlan";
     }
 
@@ -101,5 +107,14 @@ public class mainController {
 //        log.info("exLayout1 진입");
 //    }
 //
+
+    @PostMapping("/requestDelete")
+    public String removePlan(@RequestParam Long RowNum , RedirectAttributes redirectAttributes){
+        log.info("삭제 데이터 행 번호 : "+RowNum);
+        mainService.removePlan(RowNum); //서비스 삭제기능 호출
+        redirectAttributes.addFlashAttribute("removePlan","삭제한 행 번호"+RowNum);
+        return "redirect:/ProductionPlan";
+    }
+
 
 }

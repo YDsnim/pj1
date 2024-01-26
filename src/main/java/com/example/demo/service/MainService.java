@@ -53,4 +53,10 @@ public class MainService implements MainServiceInter{
 
         return  productionPlanRepo.findAll();
     }
+
+    @Override
+    public void removePlan(Long RowNum) {
+        productionPlanRepo.deleteById(RowNum);
+
+    }
 }

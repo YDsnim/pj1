@@ -28,7 +28,7 @@
 <h2>Product Details</h2>
 <form action="/saveProduct" method="post" th:object="${productionPlanDTO}">
     <label for="ProductionQuantity">ProductionQuantity:</label>
-    <input type="text" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
+    <input type="number" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
     <br>
     <label for="ProductionDate">ProductionDate:</label>
     <input type="date" id="ProductionDate" th:field="*{ProductionDate}" required>
@@ -37,6 +37,9 @@
 </form>
 
 <h2>생산계획 목록</h2>
+
+
+
 <table>
 
 <!-- productList에 있는 데이터를 반복하며 출력 -->
@@ -51,13 +54,15 @@
 
     <td th:text="${showPlanList.ProductionQuantity}"></td>
 
-    <td  th:text="${
-    #dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')
-    }"></td>
+    <td  th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
 
-    <td>수정 삭제 </td>
+    <form th:action="@{/requestDelete}" method="post" >
+    <input type="hidden" name="RowNum" th:value="${showPlanList.RowNum}" />
+    <td><button type="submit">삭제</button> </td>
+    </form>
 </tr>
 </table>
+
 
 
 
