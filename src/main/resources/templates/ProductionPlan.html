@@ -57,7 +57,7 @@
     <td  th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
 
     <form th:action="@{/requestDelete}" method="post" >
-    <input type="hidden" name="RowNum" th:value="${showPlanList.RowNum}" />
+    <input type="hidden" name="rowNum" th:value="${showPlanList.RowNum}" />
     <td><button type="submit">삭제</button> </td>
     </form>
 </tr>

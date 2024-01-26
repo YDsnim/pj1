@@ -16,7 +16,7 @@ import java.util.Date;
 public class ProductionPlan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RowNum; //PK
 
     @Column(nullable = false)
