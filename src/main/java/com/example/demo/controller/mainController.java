@@ -28,8 +28,11 @@ public class mainController {
     public String ProductionPlan(Model model) {
         log.info("ProductionPlan 진입");
         List<ProductionPlan> productionPlanList = mainService.ShowProductionPlanList();
+        //DB의 생상계획목록을 출력
         model.addAttribute("showProductionPlanList", productionPlanList);
-        // ProductDTO를 뷰에서 사용하는 경우 아래와 같이 모델에 추가
+        //제품리스트를 읽어오는 모델
+        model.addAttribute("productList",mainService.ProductList());
+        // 항목에 입력한 값을 th->ProductDTO로 전송 저장을 누르면
         model.addAttribute("productionPlanDTO", new ProductionPlanDTO());
 
         //삭제시 뭘 지웠는지 로그로 표현
@@ -43,9 +46,9 @@ public class mainController {
     public String saveProduction(@ModelAttribute ProductionPlanDTO productionPlanDTO) {
         log.info("저장버튼 클릭 확인");
 
-        //타임리프에서 받아온 날짜정보 파싱하기
-        Date dateStirng = productionPlanDTO.getProductionDate();
-        Date productionDate = null;
+//        //타임리프에서 받아온 날짜정보 파싱하기
+//        Date dateString = productionPlanDTO.getProductionDate();
+//        Date productionDate = null;
 
 
         mainService.SaveProduction(productionPlanDTO);

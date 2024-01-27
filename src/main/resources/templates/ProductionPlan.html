@@ -29,13 +29,23 @@
 
 <h2>Product Details</h2>
 <form action="/saveProduct" method="post" th:object="${productionPlanDTO}">
-    <label for="ProductionQuantity">ProductionQuantity:</label>
-    <input type="number" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
-    <br>
-    <label for="ProductionDate">ProductionDate:</label>
+    <label for="ProductionDate">생산 예정일:</label>
     <input type="date" id="ProductionDate" th:field="*{ProductionDate}" required>
     <br>
-    <button type="submit">Save Product</button>
+    <label for="ProductName">제품명:</label>
+    <select name="productName" id="ProductName" th:field="*{ProductName}">
+        <option th:each="product:${productList}"
+                th:value="${product.productName}"
+                th:text="${product.productName}">
+        </option>
+    </select>
+    <br>
+    <label for="ProductionQuantity">생산 수량:</label>
+    <input type="number" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
+    <br>
+
+    <br>
+    <button type="submit">계획 등록</button>
 </form>
 
 
@@ -52,7 +62,7 @@
         <th>삭제</th>
     </tr>
     <tr th:each="showPlanList : ${showProductionPlanList}">
-        <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.ProductionPK}"></td>
+        <td th:if="${showPlanList.ProductionPK != null}" th:text="${showPlanList.ProductionPK}"></td>
 
         <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
 

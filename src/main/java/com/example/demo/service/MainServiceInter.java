@@ -22,6 +22,7 @@ public interface MainServiceInter {
 
     List<ProductionPlan> ShowProductionPlanList();  //DB에서 출력
 
+    List<Product> ProductList();
     //View->Controller->Service->Repo->DB
     void removePlan(Long ProductionPK);   //뷰에서 데이터 열 삭제
 

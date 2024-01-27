@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.ProductionPlanDTO;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductionPlan;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.ProductionPlanRepo;
@@ -33,13 +34,17 @@ public class MainService implements MainServiceInter{
     public void SaveProduction(ProductionPlanDTO productionPlanDTO) {
         ProductionPlan productionPlan = new ProductionPlan();
 
-
-       productionPlan.setProductionQuantity(productionPlanDTO.getProductionQuantity());
-        System.out.println("받은 제품수량 값: "+productionPlanDTO.getProductionQuantity());
         productionPlan.setProductionDate(productionPlanDTO.getProductionDate());
         System.out.println("받은 생산예정일 값: "+productionPlanDTO.getProductionDate());
 
-        System.out.println("저장하고 싶은값"+productionPlan);
+        Product product = productRepo.findByProductName(productionPlanDTO.getProductName());
+        productionPlan.setProduct(product);
+        System.out.println("받은 제품 값: "+productionPlanDTO.getProductionQuantity());
+
+        productionPlan.setProductionQuantity(productionPlanDTO.getProductionQuantity());
+        System.out.println("받은 제품수량 값: "+productionPlanDTO.getProductionQuantity());
+
+
         //ProductRepo 를 통해서 DB에 저장
         productionPlanRepo.save(productionPlan);
     }
@@ -49,9 +54,13 @@ public class MainService implements MainServiceInter{
 
     @Override //리포짓토리에서 바로 구현 A1
     public List<ProductionPlan> ShowProductionPlanList() {
-
-
         return  productionPlanRepo.findAll();
+    }
+
+    @Override
+    public List<Product> ProductList() {
+        //제품 리스트 불러오는 메소드
+        return productRepo.findAll();
     }
 
     @Override
