@@ -55,8 +55,8 @@ public class MainService implements MainServiceInter{
     }
 
     @Override
-    public void removePlan(Long RowNum) {
-        productionPlanRepo.deleteById(RowNum);
+    public void removePlan(Long ProductionPK) {
+        productionPlanRepo.deleteById(ProductionPK);
 
     }
 }

@@ -14,7 +14,6 @@ public interface MainServiceInter {
     //DTO to ENTITY
     //즉 Service->Cont->VIEW->th-> DTO->ENTITY ->Repo->DB 저장
 
-//   void SaveProduct(ProductDTO productDTO);
 
 
     //DTO to ENTITY
@@ -24,7 +23,7 @@ public interface MainServiceInter {
     List<ProductionPlan> ShowProductionPlanList();  //DB에서 출력
 
     //View->Controller->Service->Repo->DB
-    void removePlan(Long RowNum);   //뷰에서 데이터 열 삭제
+    void removePlan(Long ProductionPK);   //뷰에서 데이터 열 삭제
 
 
     /*

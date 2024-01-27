@@ -45,20 +45,24 @@
 <input type="text" id="ListSearch" th:text="*{Searching}" required>
 <table>
     <tr>
-        <th>RowNum</th>
-        <th>ProductionQuantity</th>
-        <th>ProductionDate</th>
-        <th>수정/삭제</th>
+        <th>번호</th>
+        <th>생산 예정일</th>
+        <th>생산 제품</th>
+        <th>생산 개수</th>
+        <th>삭제</th>
     </tr>
     <tr th:each="showPlanList : ${showProductionPlanList}">
-        <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.RowNum}"></td>
+        <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.ProductionPK}"></td>
+
+        <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
+
+        <td th:text="${showPlanList.product.productName}"></td>
 
         <td th:text="${showPlanList.ProductionQuantity}"></td>
 
-        <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
-<!--        삭제 버튼-->
+        <!--        삭제 버튼-->
         <form th:action="@{/requestDelete}" method="post">
-            <input type="hidden" name="rowNum" th:value="${showPlanList.RowNum}"/>
+            <input type="hidden" name="productionPK" th:value="${showPlanList.ProductionPK}"/>
             <td>
                 <button type="submit">삭제</button>
             </td>

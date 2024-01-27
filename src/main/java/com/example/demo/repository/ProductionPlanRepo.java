@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 
-public interface ProductionPlanRepo extends JpaRepository<ProductionPlan, Date> {
+public interface ProductionPlanRepo extends JpaRepository<ProductionPlan, Long> {
 
 
 }
