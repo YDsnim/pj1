@@ -110,9 +110,9 @@ public class mainController {
 
     @PostMapping("/requestDelete")
     public String removePlan(@RequestParam Long rowNum , RedirectAttributes redirectAttributes){
-        log.info("삭제 데이터 행 번호 : "+rowNum);
+//        log.info("삭제 데이터 행 번호 : "+rowNum);
         mainService.removePlan(rowNum); //서비스 삭제기능 호출
-        redirectAttributes.addFlashAttribute("removePlan","삭제한 행 번호"+rowNum);
+        redirectAttributes.addFlashAttribute("removePlan","삭제한 행 번호 :"+rowNum);
         return "redirect:/ProductionPlan";
     }
 

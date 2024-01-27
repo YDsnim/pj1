@@ -16,11 +16,13 @@ import java.util.List;
 public class Product {
 //제품 Entity
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long RowNum; //PK
+
     @Column(length= 20 , nullable=false)
     private String ProductCode; //제품의 코드
 
     @Column(length = 20,nullable = false)
     private String ProductName; //제품의 이름
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<ProductionPlan> productionPlanList = new ArrayList<>();
+
 }
