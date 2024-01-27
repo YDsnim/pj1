@@ -1,3 +1,12 @@
+//QueryDSL
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+//QueryDSL
+
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.2'
@@ -35,7 +44,10 @@ dependencies {
 	//Date타입 java8이 최고라는데?
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 	//QueryDSL
-
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 	//QueryDSL
 
 
