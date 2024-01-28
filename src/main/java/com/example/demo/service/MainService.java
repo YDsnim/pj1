@@ -31,6 +31,11 @@ public class MainService implements MainServiceInter{
 //    }
 
     @Override
+    public List<ProductionPlanDTO> findPlanByKeyword(Long ProductionPK) {
+        return productionPlanRepo.findPlanByKeyword(ProductionPK);
+    }
+
+    @Override
     public void SaveProduction(ProductionPlanDTO productionPlanDTO) {
         ProductionPlan productionPlan = new ProductionPlan();
 
@@ -48,9 +53,6 @@ public class MainService implements MainServiceInter{
         //ProductRepo 를 통해서 DB에 저장
         productionPlanRepo.save(productionPlan);
     }
-
-
-
 
     @Override //리포짓토리에서 바로 구현 A1
     public List<ProductionPlan> ShowProductionPlanList() {

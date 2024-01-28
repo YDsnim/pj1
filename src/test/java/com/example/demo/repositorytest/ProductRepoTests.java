@@ -43,18 +43,15 @@ public class ProductRepoTests {
         for (Long i = 0L; i <= 30; i++) {
 //            ==Product  생성
             Product product = Product.builder()
-                    .ProductCode("PDC"+i)
-                    .ProductName("G"+i)
+                    .productName("G"+i)
                     .build();
 //            product.getProductionPlanList().add(productionPlan);
             productRepo.save(product);
             System.out.println(product);
 //              ==ProductPlan 생성
             ProductionPlan productionPlan = ProductionPlan.builder() //엔티티 입력
-                    .ProductionPK("PK"+i)
                     .ProductionQuantity(i)
                     .ProductionDate(Date.from(Instant.now()))
-                    .complete(false)
                     .build();
             productionPlanRepo.save(productionPlan);          //엔티티와 연결된 리포지토리 입력
             System.out.println(productionPlan.getProductionPK());   //콘솔 출력
@@ -88,12 +85,7 @@ public class ProductRepoTests {
 
     public void testUpdate(){
 
-            Product product = Product.builder()
-                    .ProductCode("PDC")
-                    .ProductName("G")
-                    .build();
-            productRepo.save(product);
-            System.out.println(product);
+
 
     }
 

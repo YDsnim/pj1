@@ -10,21 +10,21 @@ import java.util.List;
 //여기엔 리포지토리 관련 작성 필요 x
 public interface MainServiceInter {
 
+    //순번조회기능
+    List<ProductionPlanDTO> findPlanByKeyword (Long ProductionPK);
 
     //DTO to ENTITY
-    //즉 Service->Cont->VIEW->th-> DTO->ENTITY ->Repo->DB 저장
-
-
-
-    //DTO to ENTITY
+    // Service->Cont->VIEW->th-> DTO->ENTITY ->Repo->DB 저장
     void SaveProduction(ProductionPlanDTO productionPlanDTO); //입력값 저장
-    //DB-> View
 
+    //DB-> View
     List<ProductionPlan> ShowProductionPlanList();  //DB에서 출력
 
     List<Product> ProductList();
     //View->Controller->Service->Repo->DB
     void removePlan(Long ProductionPK);   //뷰에서 데이터 열 삭제
+
+
 
 
     /*

@@ -15,7 +15,6 @@ public class dtoToEntityTest {
     @Test
     public void DTO(){
         ProductDTO productDTO = ProductDTO.builder()
-                .ProductCode("CODE999")
                 .ProductName("G999")
 
                 .build();

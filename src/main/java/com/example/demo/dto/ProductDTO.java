@@ -17,7 +17,5 @@ import java.util.List;
 @Data
 public class ProductDTO {
 
-    private String ProductCode; //제품의 코드
     private String ProductName; //제품의 이름
-    private List<ProductionPlan> productionPlanList = new ArrayList<>();
 }
