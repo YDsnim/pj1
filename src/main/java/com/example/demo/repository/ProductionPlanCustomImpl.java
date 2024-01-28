@@ -37,7 +37,7 @@ public class ProductionPlanCustomImpl implements ProductionPlanCustom {
                 .where(pPlan.ProductionPK.eq(ProductionPK))
                 .orderBy(pPlan.ProductionPK.desc());
 
-        return tupleJPAQuery.fetchJoin().fetch().stream().map(tuple ->
+        return tupleJPAQuery.fetch().stream().map(tuple ->
                         ProductionPlanDTO.builder()
                                 .ProductionPK(tuple.get(pPlan.ProductionPK))
                                 .ProductionDate(tuple.get(pPlan.ProductionDate))

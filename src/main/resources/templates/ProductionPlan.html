@@ -51,8 +51,7 @@
 
 <h2>생산계획 목록</h2>
 <br>
-<label for="ListSearch">조회하기</label>
-<input type="text" id="ListSearch" th:text="*{Searching}" required>
+
 <table>
     <tr>
         <th>번호</th>
@@ -79,6 +78,33 @@
         </form>
     </tr>
 </table>
+
+<label for="searchInput">조회할 PK 입력:</label>
+<input type="text" id="searchInput">
+<button type="button" onclick="searchPlan()">조회하기</button>
+
+
+<script>
+    function searchPlan() {
+<!--   // 입력 필드에서 PK 가져오기-->
+    var productionPK = document.getElementById("searchInput").value;
+<!--    // AJAX를 사용하여 서버에 요청을 보냄-->
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/ProductionPlan/" + productionPK, true);
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+<!--    // 서버로부터 받은 응답을 처리하여 테이블에 표시-->
+    var response = JSON.parse(xhr.responseText);
+    displaySearchResults(response);
+    }
+    };
+    xhr.send();
+    }
+
+    function displaySearchResults(data) {
+<!--    // 생산계획 테이블에 결과를 표시하는 코드-->
+    }
+</script>
 
 
 </body>
