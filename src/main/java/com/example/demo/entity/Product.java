@@ -14,12 +14,9 @@ import java.util.List;
 @Setter
 @ToString
 public class Product {
-//제품 Entity
-@Id
-    @Column(length= 20 , nullable=false)
-    private String ProductCode; //제품의 코드
-
-    @Column(length = 20,nullable = false)
-    private String ProductName; //제품의 이름
+    //제품 Entity
+    @Id
+    @Column(name = "product_name")
+    private String productName; //제품의 이름
 
 }

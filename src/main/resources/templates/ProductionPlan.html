@@ -24,47 +24,87 @@
 </head>
 <body>
 
-<h1>생산계획</h1>
+<h1>생산계획관리</h1>
 
 
-<h2>Product Details</h2>
+<h2>생산계획 등록하기</h2>
 <form action="/saveProduct" method="post" th:object="${productionPlanDTO}">
-    <label for="ProductionQuantity">ProductionQuantity:</label>
-    <input type="number" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
-    <br>
-    <label for="ProductionDate">ProductionDate:</label>
+    <label for="ProductionDate">생산 예정일:</label>
     <input type="date" id="ProductionDate" th:field="*{ProductionDate}" required>
     <br>
-    <button type="submit">Save Product</button>
+    <label for="ProductName">제품명:</label>
+    <select name="productName" id="ProductName" th:field="*{ProductName}">
+        <option th:each="product:${productList}"
+                th:value="${product.productName}"
+                th:text="${product.productName}">
+        </option>
+    </select>
+    <br>
+    <label for="ProductionQuantity">생산 수량:</label>
+    <input type="number" id="ProductionQuantity" th:field="*{ProductionQuantity}" required>
+    <br>
+
+    <br>
+    <button type="submit">계획 등록</button>
 </form>
 
 
 <h2>생산계획 목록</h2>
 <br>
-<label for="ListSearch">조회하기</label>
-<input type="text" id="ListSearch" th:text="*{Searching}" required>
+
 <table>
     <tr>
-        <th>RowNum</th>
-        <th>ProductionQuantity</th>
-        <th>ProductionDate</th>
-        <th>수정/삭제</th>
+        <th>번호</th>
+        <th>생산 예정일</th>
+        <th>생산 제품</th>
+        <th>생산 개수</th>
+        <th>삭제</th>
     </tr>
     <tr th:each="showPlanList : ${showProductionPlanList}">
-        <td th:if="${showPlanList.RowNum != null}" th:text="${showPlanList.RowNum}"></td>
+        <td th:if="${showPlanList.ProductionPK != null}" th:text="${showPlanList.ProductionPK}"></td>
+
+        <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
+
+        <td th:text="${showPlanList.product.productName}"></td>
 
         <td th:text="${showPlanList.ProductionQuantity}"></td>
 
-        <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
-<!--        삭제 버튼-->
+        <!--        삭제 버튼-->
         <form th:action="@{/requestDelete}" method="post">
-            <input type="hidden" name="rowNum" th:value="${showPlanList.RowNum}"/>
+            <input type="hidden" name="productionPK" th:value="${showPlanList.ProductionPK}"/>
             <td>
                 <button type="submit">삭제</button>
             </td>
         </form>
     </tr>
 </table>
+
+<label for="searchInput">조회할 PK 입력:</label>
+<input type="text" id="searchInput">
+<button type="button" onclick="searchPlan()">조회하기</button>
+
+
+<script>
+    function searchPlan() {
+<!--   // 입력 필드에서 PK 가져오기-->
+    var productionPK = document.getElementById("searchInput").value;
+<!--    // AJAX를 사용하여 서버에 요청을 보냄-->
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/ProductionPlan/" + productionPK, true);
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+<!--    // 서버로부터 받은 응답을 처리하여 테이블에 표시-->
+    var response = JSON.parse(xhr.responseText);
+    displaySearchResults(response);
+    }
+    };
+    xhr.send();
+    }
+
+    function displaySearchResults(data) {
+<!--    // 생산계획 테이블에 결과를 표시하는 코드-->
+    }
+</script>
 
 
 </body>

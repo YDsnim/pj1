@@ -16,11 +16,15 @@ import java.util.Date;
 
 public class ProductionPlanDTO {
 
-    private Long RowNum; //PK
+    private Long ProductionPK; //PK
 
-    private Long ProductionQuantity; //생산 소요량
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ProductionDate;//생산 예정일
+
+    private String ProductName; //제품명
+
+    private Long ProductionQuantity; //생산 소요량
+
 
 
 }
