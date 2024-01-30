@@ -54,14 +54,14 @@ public class MainService implements MainServiceInter {
     public void SaveProduction(ProductionPlanDTO productionPlanDTO) {
         ProductionPlan productionPlan = new ProductionPlan();
 
-        productionPlan.setProductionCode(productionPlanDTO.getProductionCode());
-        System.out.println("받은 생산번호 값: " + productionPlanDTO.getProductionCode());
+        productionPlan.setProductionCode(productionPlanDTO.getProductionPk());
+        System.out.println("받은 생산번호 값: " + productionPlanDTO.getProductionPk());
 
         productionPlan.setProductionDate(productionPlanDTO.getProductionDate());
         System.out.println("받은 생산예정일 값: " + productionPlanDTO.getProductionDate());
 
-        Product product = productRepo.findByProductName(productionPlanDTO.getProductName());
-        productionPlan.setProduct(product);
+//        Product product = productRepo.findByProductName(productionPlanDTO.getProductName());
+//        productionPlan.setProduct(product);
         System.out.println("받은 제품 값: " + productionPlanDTO.getProductionQuantity());
 
         productionPlan.setProductionQuantity(productionPlanDTO.getProductionQuantity());

@@ -28,7 +28,7 @@ public class ProductionPlan {
     private Long ProductionQuantity; //생산 소요량
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "product_name", referencedColumnName = "product_name")
+    @JoinColumn (name = "productName", referencedColumnName = "productName")
     private Product product;
 
     }

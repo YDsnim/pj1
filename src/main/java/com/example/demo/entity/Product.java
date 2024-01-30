@@ -16,7 +16,7 @@ import java.util.List;
 public class Product {
     //제품 Entity
     @Id
-    @Column(name = "product_name")
+    @Column()
     private String productName; //제품의 이름
 
 }
