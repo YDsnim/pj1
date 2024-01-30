@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class ProductionPlanDTO {
 
-    private Long ProductionPK; //PK
+    private String ProductionCode; //PK
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ProductionDate;//생산 예정일

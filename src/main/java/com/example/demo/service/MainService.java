@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -37,10 +36,6 @@ public class MainService implements MainServiceInter {
 //        return null;
 //    }
 
-    @Override
-    public List<ProductionPlanDTO> findPlanByKeyword(Long ProductionPK) {
-        return productionPlanRepo.findPlanByKeyword(ProductionPK);
-    }
 
     @Override
     public void findRowDataByButton(VendorDTO vendorDTO) {
@@ -58,6 +53,9 @@ public class MainService implements MainServiceInter {
     @Override
     public void SaveProduction(ProductionPlanDTO productionPlanDTO) {
         ProductionPlan productionPlan = new ProductionPlan();
+
+        productionPlan.setProductionCode(productionPlanDTO.getProductionCode());
+        System.out.println("받은 생산번호 값: " + productionPlanDTO.getProductionCode());
 
         productionPlan.setProductionDate(productionPlanDTO.getProductionDate());
         System.out.println("받은 생산예정일 값: " + productionPlanDTO.getProductionDate());
@@ -115,10 +113,11 @@ public class MainService implements MainServiceInter {
         return productRepo.findAll();
     }
 
+
     //계획 삭제
     @Override
-    public void removePlan(Long ProductionPK) {
-        productionPlanRepo.deleteById(ProductionPK);
+    public void removePlan(String ProductionCode) {
+        productionPlanRepo.deleteById(ProductionCode);
 
     }
 

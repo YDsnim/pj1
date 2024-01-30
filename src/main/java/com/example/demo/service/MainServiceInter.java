@@ -7,13 +7,11 @@ import com.example.demo.entity.ProductionPlan;
 import com.example.demo.entity.Vendor;
 
 import java.util.List;
-import java.util.Optional;
 
 //여기엔 리포지토리 관련 작성 필요 x
 public interface MainServiceInter {
 
-    //순번조회기능
-    List<ProductionPlanDTO> findPlanByKeyword (Long ProductionPK);
+    //계약번호 조회기능
 
     public void findRowDataByButton (VendorDTO vendorDTO);
     //DTO to ENTITY
@@ -28,7 +26,10 @@ public interface MainServiceInter {
 
     List<Product> ProductList();
     //View->Controller->Service->Repo->DB
-    void removePlan(Long ProductionPK);   //뷰에서 데이터 열 삭제
+
+    //계획 삭제
+    void removePlan(String productionCode);//뷰에서 데이터 열 삭제
+
     void removeVendor(String businessLicense);   //뷰에서 데이터 열 삭제
 
 

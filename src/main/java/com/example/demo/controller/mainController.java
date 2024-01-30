@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ProductDTO;
 import com.example.demo.dto.ProductionPlanDTO;
 import com.example.demo.entity.ProductionPlan;
-import com.example.demo.repository.ProductionPlanCustom;
 import com.example.demo.service.MainService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,10 +20,6 @@ import java.util.List;
 public class mainController {
     @Autowired
     private MainService mainService;
-    @Autowired
-    //주입 할 빈 지정해준다
-    @Qualifier("productionPlanCustomImpl")
-    private ProductionPlanCustom productionPlanCustom;
 
     @GetMapping("/ProductionPlan")
     public String ProductionPlan(Model model) {
@@ -56,19 +49,13 @@ public class mainController {
 
 
     @PostMapping("/requestDelete")
-    public String removePlan(@RequestParam Long productionPK, RedirectAttributes redirectAttributes) {
-//        log.info("삭제 데이터 행 번호 : "+rowNum);
-        mainService.removePlan(productionPK); //서비스 삭제기능 호출
-        redirectAttributes.addFlashAttribute("removePlan", "삭제한 행 번호 :" + productionPK);
+    public String removePlan(@RequestParam String productionCode, RedirectAttributes redirectAttributes) {
+        log.info("삭제버튼 누름");
+        mainService.removePlan(productionCode); // 서비스 삭제기능 호출
+        redirectAttributes.addFlashAttribute("removePlan", "삭제한 행 번호 :" + productionCode);
         return "redirect:/ProductionPlan";
     }
 
-    @GetMapping("/ProductionPlan/{productionPK}")
-    public ResponseEntity<List<ProductionPlanDTO>> getPlanByPK(@PathVariable Long productionPK) {
-
-       List<ProductionPlanDTO> planDTO = productionPlanCustom.findPlanByKeyword(productionPK);
-        return ResponseEntity.ok(planDTO); //완료시 planDTO 가져옴
-    }
 
 
 

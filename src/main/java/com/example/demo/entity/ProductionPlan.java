@@ -16,12 +16,9 @@ import java.util.Date;
 @ToString
 public class ProductionPlan {
 
-
-
     @Id
-    @Column()
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ProductionPK; //PK
+    @Column
+    private String ProductionCode;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(columnDefinition = "DATE",nullable = false)//columDefinition 을 이용하면 원하는 컬럼타입으로 데이터 추출가능

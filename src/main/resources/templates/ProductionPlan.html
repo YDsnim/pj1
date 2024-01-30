@@ -28,7 +28,10 @@
 
 
 <h2>생산계획 등록하기</h2>
-<form action="/saveProduct" method="post" th:object="${productionPlanDTO}">
+
+<form id="saveTable" action="/saveProduct" method="post" th:object="${productionPlanDTO}">
+
+    생산계획 번호 : <input type="text" id="ProductionCode" name="productionCode" th:field="*{ProductionCode}" >
     <label for="ProductionDate">생산 예정일:</label>
     <input type="date" id="ProductionDate" th:field="*{ProductionDate}" required>
     <br>
@@ -45,7 +48,8 @@
     <br>
 
     <br>
-    <button type="submit">계획 등록</button>
+    <button type="submit">계획 등록/수정</button>
+
 </form>
 
 
@@ -62,7 +66,7 @@
         <th>수정</th>
     </tr>
     <tr th:each="showPlanList : ${showProductionPlanList}">
-        <td th:if="${showPlanList.ProductionPK != null}" th:text="${showPlanList.ProductionPK}"></td>
+        <td th:if="${showPlanList.ProductionCode != null}" th:text="${showPlanList.ProductionCode}"></td>
 
         <td th:text="${#dates.format(showPlanList.ProductionDate,'yyyy-MM-dd')}"></td>
 
@@ -72,14 +76,14 @@
 
         <!--        삭제 버튼-->
         <form th:action="@{/requestDelete}" method="post">
-            <input type="hidden" name="productionPK" th:value="${showPlanList.ProductionPK}"/>
+            <input type="hidden" name="productionCode" th:value="${showPlanList.ProductionCode}"/>
             <td>
                 <button type="submit">삭제</button>
             </td>
         </form>
-<!--        수정버튼-->
+        <!--        수정버튼-->
         <form>
-            <input type="hidden" name="businessLicense"/>
+            <input type="hidden" name=""/>
             <td>
                 <button onclick="getData(this)" type="button"> 수정</button>
             </td>
@@ -87,17 +91,17 @@
     </tr>
 </table>
 
-<!-- <label for="searchInput">조회할 PK 입력:</label>
+<!-- <label for="searchInput">조회할 ProductionCode 입력:</label>
 <input type="text" id="searchInput">
 <button type="button" onclick="searchPlan()">조회하기</button>
  -->
- <script>
+<script>
     function getData(btn) {
         var row = btn.parentNode.parentNode; // 수정 버튼이 속한 행
         var cells = row.getElementsByTagName("td"); // 행의 모든 셀
 
         // 각 셀의 값 가져오기
-        var productionPK = cells[0].innerText.trim(); // 번호
+        var ProductionCode = cells[0].innerText.trim(); // 번호
         var productionDate = cells[1].innerText.trim(); // 생산 예정일
         var productName = cells[2].innerText.trim(); // 생산 제품
         var productionQuantity = cells[3].innerText.trim(); // 생산 개수
@@ -108,7 +112,11 @@
         document.getElementById("ProductionQuantity").value = productionQuantity;
 
         // 수정할 데이터의 번호를 숨겨진 입력란에 설정
-        document.getElementById("ProductionPK").value = productionPK;
+        document.getElementById("ProductionCode").value = ProductionCode;
+
+         // 폼 서브밋
+
+        console.log(ProductionCode);
     }
 </script>
 
