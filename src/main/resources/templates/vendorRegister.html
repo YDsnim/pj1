@@ -57,8 +57,9 @@
 <h2>거래처 목록</h2>
 <br>
 
-<table>
+<table id="tableVendorList">
     <tr>
+        <thead>
         <th>사업자 번호</th>
         <th>거래처 이름</th>
         <th>거래처 주소</th>
@@ -67,8 +68,9 @@
         <th>담당자</th>
         <th>삭제</th>
         <th>수정</th>
-
+        </thead>
     </tr>
+    <tbody>
     <tr th:each="showVendor : ${showVendorList}">
         <!--        사업자    번호 출력-->
         <td th:if="${showVendor.businessLicense != null}" th:text="${showVendor.businessLicense}"></td>
@@ -93,41 +95,41 @@
         </form>
 
         <!-- 수정 버튼 -->
-        <form th:action="@{/vendorModify}" method="post">
-            <input type="hidden" name="businessLicense" th:value="${showVendor.businessLicense}"/>
+        <form>
+            <input type="hidden" name="businessLicense"/>
             <td>
-                <button type="submit"> 수정 </button>
+                <button onclick="getData(this)" type="button"> 수정</button>
             </td>
         </form>
     </tr>
+    </tbody>
 </table>
 
-<!--<label for="searchInput">조회할 PK 입력:</label>-->
-<!--<input type="text" id="searchInput">-->
-<!--<button type="button" onclick="searchPlan()">조회하기</button>-->
+<script>
+    function getData(btn){
+    var row = btn.parentNode.parentNode;//버튼이 속한 행
+    var cells = row.getElementsByTagName("td");
+    var rowData = {};
+
+// 각 행의 셀(td)에 대해 반복
+    for (var j = 0; j < cells.length; j++) {
+        var headerCell = document.querySelector("#tableVendorList th:nth-child(" + (j+1) + ")");
+        var headerText = headerCell.innerText;
+        var cell = cells[j];
+        rowData[headerText] = cell.innerText; //해당 열의 데이터를 rowData 객체에 추가
+    }
+    console.log(rowData);
+
+document.getElementById("businessLicense").value = rowData["사업자 번호"];
+document.getElementById("vendorName").value = rowData["거래처 이름"];
+document.getElementById("vendorAddress").value = rowData["거래처 주소"];
+document.getElementById("vendorPnumber").value = rowData["거래처 전화번호"];
+document.getElementById("vendorEmail").value = rowData["거래처 이메일"];
+document.getElementById("pic").value = rowData["담당자"];
+
+    }
 
 
-<!--<script>-->
-<!--    function searchPlan() {-->
-<!--&lt;!&ndash;   // 입력 필드에서 PK 가져오기&ndash;&gt;-->
-<!--    var productionPK = document.getElementById("searchInput").value;-->
-<!--&lt;!&ndash;    // AJAX를 사용하여 서버에 요청을 보냄&ndash;&gt;-->
-<!--    var xhr = new XMLHttpRequest();-->
-<!--    xhr.open("GET", "/ProductionPlan/" + productionPK, true);-->
-<!--    xhr.onreadystatechange = function () {-->
-<!--    if (xhr.readyState === 4 && xhr.status === 200) {-->
-<!--&lt;!&ndash;    // 서버로부터 받은 응답을 처리하여 테이블에 표시&ndash;&gt;-->
-<!--    var response = JSON.parse(xhr.responseText);-->
-<!--    displaySearchResults(response);-->
-<!--    }-->
-<!--    };-->
-<!--    xhr.send();-->
-<!--    }-->
-
-<!--    function displaySearchResults(data) {-->
-<!--&lt;!&ndash;    // 생산계획 테이블에 결과를 표시하는 코드&ndash;&gt;-->
-<!--    }-->
-<!--</script>-->
-
+</script>
 </body>
 </html>

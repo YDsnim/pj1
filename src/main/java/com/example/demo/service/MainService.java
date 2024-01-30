@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -42,6 +41,18 @@ public class MainService implements MainServiceInter {
     public List<ProductionPlanDTO> findPlanByKeyword(Long ProductionPK) {
         return productionPlanRepo.findPlanByKeyword(ProductionPK);
     }
+
+    @Override
+    public void findRowDataByButton(VendorDTO vendorDTO) {
+        VendorDTO rowData = new VendorDTO();
+        rowData.setBusinessLicense(vendorDTO.getBusinessLicense());
+        rowData.setVendorName(vendorDTO.getVendorName());
+        rowData.setVendorAddress(vendorDTO.getVendorAddress());
+        rowData.setVendorPnumber(vendorDTO.getVendorPnumber());
+        rowData.setVendorEmail(vendorDTO.getVendorEmail());
+        rowData.setPic(vendorDTO.getVendorEmail());
+    }
+
 
 
     @Override
@@ -120,19 +131,11 @@ public class MainService implements MainServiceInter {
 
 
 
-    private VendorDTO convertToDTO(Vendor vendor) {
-        VendorDTO dto = new VendorDTO();
-        dto.setBusinessLicense(vendor.getBusinessLicense());
-        dto.setVendorName(vendor.getVendorName());
-        dto.setVendorAddress(vendor.getVendorAddress());
-        dto.setVendorPnumber(vendor.getVendorPnumber());
-        dto.setVendorEmail(vendor.getVendorEmail());
-        dto.setPic(vendor.getPic());
-        return dto;
 
 
 
-    }
+
+
 
 
 }

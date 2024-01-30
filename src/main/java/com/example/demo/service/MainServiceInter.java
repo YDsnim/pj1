@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.ProductDTO;
 import com.example.demo.dto.ProductionPlanDTO;
 import com.example.demo.dto.VendorDTO;
 import com.example.demo.entity.Product;
@@ -16,6 +15,7 @@ public interface MainServiceInter {
     //순번조회기능
     List<ProductionPlanDTO> findPlanByKeyword (Long ProductionPK);
 
+    public void findRowDataByButton (VendorDTO vendorDTO);
     //DTO to ENTITY
     // Service->Cont->VIEW->th-> DTO->ENTITY ->Repo->DB 저장
     void SaveProduction(ProductionPlanDTO productionPlanDTO); //계획등록 뷰에서 입력한 값 저장

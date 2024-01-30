@@ -1,23 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ProductionPlanDTO;
 import com.example.demo.dto.VendorDTO;
-import com.example.demo.entity.ProductionPlan;
 import com.example.demo.entity.Vendor;
-import com.example.demo.repository.ProductionPlanCustom;
 import com.example.demo.service.MainService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @Log4j2
@@ -25,10 +21,7 @@ import java.util.Optional;
 public class vendorController {
     @Autowired
     private MainService mainService;
-//    @Autowired
-    //주입 할 빈 지정해준다
-//    @Qualifier("productionPlanCustomImpl")
-//    private ProductionPlanCustom productionPlanCustom;
+
 
     @GetMapping("/Vendor")
     public String ProductionPlan(Model model) {
@@ -37,10 +30,13 @@ public class vendorController {
         //DB의 등록된 거래처 목록을 출력
         model.addAttribute("showVendorList", vendorList);
 
-//        //제품리스트를 읽어오는 모델
-//        model.addAttribute("productList", mainService.ProductList());
+//        for (Vendor vl:vendorList
+//             ) {
+//            System.out.println(vl);
+//
+//        }
 
-//        // th에서 주입할 VendorDTO 바인딩 ( th->vendorDTO)
+//         th에서 주입할 VendorDTO 바인딩 ( th->vendorDTO)
         model.addAttribute("vendorDTO", new VendorDTO());
 
         //삭제시 뭘 지웠는지 로그로 표현
@@ -58,7 +54,6 @@ public class vendorController {
     }
 
 
-
     @PostMapping("/requestDeleteVendor")
     public String removeVendor(@RequestParam String businessLicense, RedirectAttributes redirectAttributes) {
         mainService.removeVendor(businessLicense); //서비스 삭제기능 호출
@@ -66,18 +61,17 @@ public class vendorController {
         return "redirect:/Vendor";
     }
 
-
-
-
-
-
+    @PostMapping("/requestUpdate")
+    public String dataUpdate(@ModelAttribute VendorDTO vendorDTO){
+        mainService.findRowDataByButton(vendorDTO);
+        return "Vendor";
+    }
 //
 //    @GetMapping("/ProductionPlan/{productionPK}")
 //    public ResponseEntity<List<ProductionPlanDTO>> getPlanByPK(@PathVariable Long productionPK) {
 //       List<ProductionPlanDTO> planDTO = productionPlanCustom.findPlanByKeyword(productionPK);
 //        return ResponseEntity.ok(planDTO); //완료시 planDTO 가져옴
 //    }
-
 
 
 }
