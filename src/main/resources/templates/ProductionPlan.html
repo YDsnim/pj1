@@ -42,9 +42,7 @@
                 th:text="${product.productName}">
         </option>
     </select>
-<!--    <label for="complete">Complete:</label>-->
-<!--    <input type="checkbox" id="complete" name="complete" value="true" th:field="*{complete}" />-->
-<!--    <br>-->
+
     <label for="productionQuantity">생산 수량:</label>
     <input type="number" id="productionQuantity" th:field="*{productionQuantity}" required>
     <br>
@@ -93,33 +91,7 @@
     </tr>
 </table>
 
-<!-- <label for="searchInput">조회할 productionPk 입력:</label>
-<input type="text" id="searchInput">
-<button type="button" onclick="searchPlan()">조회하기</button>
- -->
-<!--<script>-->
-<!--    function getData(btn) {-->
-<!--        var row = btn.parentNode.parentNode; // 수정 버튼이 속한 행-->
-<!--        var cells = row.getElementsByTagName("td"); // 행의 모든 셀-->
 
-<!--        // 각 셀의 값 가져오기-->
-<!--        var productionPk = cells[0].innerText.trim(); // 번호-->
-<!--        var productionDate = cells[1].innerText.trim(); // 생산 예정일-->
-<!--        var product = cells[2].innerText.trim(); // 생산 제품-->
-<!--        var productionQuantity = cells[3].innerText.trim(); // 생산 개수-->
-
-<!--        // 입력란에 값 설정-->
-<!--         document.getElementById("productionPk").value = productionPk;-->
-<!--        document.getElementById("productionDate").value = productionDate;-->
-<!--        document.getElementById("product").value = product;-->
-<!--        document.getElementById("productionQuantity").value = productionQuantity;-->
-
-
-<!--         // 폼 서브밋-->
-
-<!--        console.log(productionPk,productionDate,product,productionQuantity);-->
-<!--    }-->
-<!--</script>-->
 <script>
     function getData(btn) {
         var row = btn.parentNode.parentNode; // 수정 버튼이 속한 행
