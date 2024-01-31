@@ -16,6 +16,6 @@ import java.util.List;
 @AllArgsConstructor//모든 인수를 갖는 생성자를 생성합니다.
 @Data
 public class ProductDTO {
-
+    private String productCode;
     private String ProductName; //제품의 이름
 }

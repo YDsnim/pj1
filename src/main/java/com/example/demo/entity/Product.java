@@ -11,12 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-@ToString
-public class Product {
-    //제품 Entity
+public class Product { //제품
+
     @Id
-    @Column()
-    private String productName; //제품의 이름
+    @Column(length = 20, nullable = false)
+    private String ProductCode; //
+
+    @Column(length = 20 ,nullable = false)
+    private String ProductName; //
 
 }

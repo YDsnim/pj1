@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.ProductionPlanDTO;
+import com.example.demo.dto.ProductionPlanToEntityDTO;
 import com.example.demo.dto.VendorDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductionPlan;
@@ -29,15 +30,7 @@ public class MainService implements MainServiceInter {
     //DTO to ENTITY
 
 
-//    @Override //이건 DTO를 불러서 엔티티각 컬럼과 바인딩하는 작업
-//    public List<ProductionPlanDTO> ShowProductionPlanList() {
-//        //
-//        List<ProductionPlan> productionPlans = productionPlanRepo.findAll();
-//        return null;
-//    }
-
-
-    @Override
+    @Override   // 수정 버튼 누르면 해당 버튼의 열의 데이터를 읽음
     public void findRowDataByButton(VendorDTO vendorDTO) {
         VendorDTO rowData = new VendorDTO();
         rowData.setBusinessLicense(vendorDTO.getBusinessLicense());
@@ -51,51 +44,60 @@ public class MainService implements MainServiceInter {
 
 
     @Override
-    public void SaveProduction(ProductionPlanDTO productionPlanDTO) {
-        ProductionPlan productionPlan = new ProductionPlan();
+    public void SaveProduction(ProductionPlanToEntityDTO productionPlanToEntityDTO) {
 
-        productionPlan.setProductionCode(productionPlanDTO.getProductionPk());
-        System.out.println("받은 생산번호 값: " + productionPlanDTO.getProductionPk());
 
-        productionPlan.setProductionDate(productionPlanDTO.getProductionDate());
-        System.out.println("받은 생산예정일 값: " + productionPlanDTO.getProductionDate());
-
-//        Product product = productRepo.findByProductName(productionPlanDTO.getProductName());
-//        productionPlan.setProduct(product);
-        System.out.println("받은 제품 값: " + productionPlanDTO.getProductionQuantity());
-
-        productionPlan.setProductionQuantity(productionPlanDTO.getProductionQuantity());
-        System.out.println("받은 제품수량 값: " + productionPlanDTO.getProductionQuantity());
+//        productionPlan.setProductionCode(productionPlanDTO.getProductionPk());
+//        System.out.println("받은 생산번호 값: " + productionPlanDTO.getProductionPk());
+//
+//        productionPlan.setProductionDate(productionPlanDTO.getProductionDate());
+//        System.out.println("받은 생산예정일 값: " + productionPlanDTO.getProductionDate());
+//
+//        System.out.println("받은 제품 값: " + productionPlanDTO.getProductionQuantity());
+//
+//        productionPlan.setProductionQuantity(productionPlanDTO.getProductionQuantity());
+//        System.out.println("받은 제품수량 값: " + productionPlanDTO.getProductionQuantity());
 
         //ProductRepo 를 통해서 DB에 저장
-        productionPlanRepo.save(productionPlan);
+//        productionPlanRepo.save(productionPlan);
+        productionPlanRepo.save(ProductionPlan.builder()
+                .productionPk(productionPlanToEntityDTO.getProductionPk())
+                .productionQuantity(productionPlanToEntityDTO.getProductionQuantity())
+                .productionDate(productionPlanToEntityDTO.getProductionDate())
+                .product( new Product(productionPlanToEntityDTO.getProduct().getProductCode(), productionPlanToEntityDTO.getProductionPk()))
+                .complete(productionPlanToEntityDTO.getComplete())
+                .build());
+
     }
 
     //거래처 등록/저장
     @Override
     public void RegisterVendor(VendorDTO vendorDTO) {
-        Vendor vendor = new Vendor();
-
-        vendor.setBusinessLicense(vendorDTO.getBusinessLicense());
-        System.out.println("입력받은 사업자 등록번호 값 :" + vendorDTO.getBusinessLicense());
-
-        vendor.setVendorName(vendorDTO.getVendorName());
-        System.out.println("입력받은 거래처 이름 값 :" + vendorDTO.getVendorName());
-
-        vendor.setVendorAddress(vendorDTO.getVendorAddress());
-        System.out.println("입력받은 거래처 주소 값 :" + vendorDTO.getVendorAddress());
-
-        vendor.setVendorPnumber(vendorDTO.getVendorPnumber());
-        System.out.println("입력받은 거래처 전화번호 값 :" + vendorDTO.getVendorPnumber());
-
-        vendor.setVendorEmail(vendorDTO.getVendorEmail());
-        System.out.println("입력받은 거래처 이메일 값 :" + vendorDTO.getVendorEmail());
-
-        vendor.setPic(vendorDTO.getPic());
-        System.out.println("입력받은 거래담당자 값 :" + vendorDTO.getPic());
+//        Vendor vendor = new Vendor();
+//
+//        vendor.setBusinessLicense(vendorDTO.getBusinessLicense());
+//        System.out.println("입력받은 사업자 등록번호 값 :" + vendorDTO.getBusinessLicense());
+//        vendor.setVendorName(vendorDTO.getVendorName());
+//        System.out.println("입력받은 거래처 이름 값 :" + vendorDTO.getVendorName());
+//        vendor.setVendorAddress(vendorDTO.getVendorAddress());
+//        System.out.println("입력받은 거래처 주소 값 :" + vendorDTO.getVendorAddress());
+//        vendor.setVendorPnumber(vendorDTO.getVendorPnumber());
+//        System.out.println("입력받은 거래처 전화번호 값 :" + vendorDTO.getVendorPnumber());
+//        vendor.setVendorEmail(vendorDTO.getVendorEmail());
+//        System.out.println("입력받은 거래처 이메일 값 :" + vendorDTO.getVendorEmail());
+//        vendor.setPic(vendorDTO.getPic());
+//        System.out.println("입력받은 거래담당자 값 :" + vendorDTO.getPic());
 
         //VendorRepo 를 통해서 DB에 저장
-        vendorRepo.save(vendor);
+        vendorRepo.save(Vendor.builder()
+                        .businessLicense(vendorDTO.getBusinessLicense())
+                        .vendorName(vendorDTO.getVendorName())
+                        .vendorAddress(vendorDTO.getVendorAddress())
+                        .vendorPnumber(vendorDTO.getVendorPnumber())
+                        .vendorEmail(vendorDTO.getVendorEmail())
+                        .vendorEmail(vendorDTO.getVendorEmail())
+                        .PIC(vendorDTO.getPic())
+                        .build());
     }
 
     @Override //리포짓토리에서 바로 구현 A1 DB에서 출력
@@ -116,8 +118,8 @@ public class MainService implements MainServiceInter {
 
     //계획 삭제
     @Override
-    public void removePlan(String ProductionCode) {
-        productionPlanRepo.deleteById(ProductionCode);
+    public void removePlan(String productionPk) {
+        productionPlanRepo.deleteById(productionPk);
 
     }
 
@@ -127,11 +129,6 @@ public class MainService implements MainServiceInter {
         vendorRepo.deleteById(businessLicense);
 
     }
-
-
-
-
-
 
 
 

@@ -8,28 +8,27 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class ProductionPlan {
+@Getter
+public class ProductionPlan { //생산계획서
 
     @Id
-    @Column
-    private String ProductionCode;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(columnDefinition = "DATE",nullable = false)//columDefinition 을 이용하면 원하는 컬럼타입으로 데이터 추출가능
-    private Date ProductionDate;//생산 예정일
+    @Column(length = 20, nullable = false)
+    private String productionPk; //
 
     @Column(nullable = false)
-    private Long ProductionQuantity; //생산 소요량
+    private Long productionQuantity; // 생산소요량
+
+    @Column(columnDefinition = "DATE", nullable = false)
+    private Date productionDate; //생산예정일
+
+    @Column(nullable = false)
+    private Boolean complete;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "productName", referencedColumnName = "productName")
     private Product product;
 
-    }
 
+}
